@@ -19,7 +19,7 @@ module NestedForm
       args << (options.delete(:href) || "javascript:void(0)")
       args << options
       @fields ||= {}
-      if object.persisted?
+      unless object.persisted?
         @template.after_nested_form(association) do
           model_object = object.class.reflect_on_association(association).klass.new
           output = %Q[<div id="#{association}_fields_blueprint" style="display: none">].html_safe
